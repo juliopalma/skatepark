@@ -28,8 +28,8 @@ app.use(fileupload({
     responseOnLimit: 'El peso del archivo supera el máximo (5Mb)'
 }))
 
-app.use(require('./routes/auth.js'))
-app.use(require('./routes/routes.js'))
+app.use(require('./routes/auth.js'));
+app.use(require('./routes/routes.js'));
 
 const PORT = 3016;
 app.listen(PORT, () => console.log(`Servidor en el puerto ${PORT}`));

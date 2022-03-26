@@ -69,6 +69,37 @@
                     <td>Ollie</td>
                     <td><input type="checkbox" /></td>
                 </tr>
+
+
+
+
+
+
+
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>{{ user.nombre }}</td>
+
+                    <td>{{ user.anos_experiencia }}</td>
+                    <td>{{ user.especialidad }}</td>
+
+                    <!--  <td>{{ user.estado }}</td> -->
+                    <td><input data-id="{{ user.id }}" type="checkbox" class="check-auth" {% if user.auth %}checked{% endif %}></td>
+
+                </tr>
+                {% endfor %}
+
+
+
+
+
+
+
+
             </tbody>
         </table>
     </div>

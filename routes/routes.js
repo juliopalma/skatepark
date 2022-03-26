@@ -9,9 +9,8 @@ function protected_routes(req, res, next) {
     if (!req.session.user) {
         req.flash('errors', 'Debe ingresar al sistema primero');
 
-
         //BORRAR LA SIGUIENTE LINEA AL TERMINAR DE CARGAR LA PAGINA DE DATOS 
-        //return res.redirect('/login')
+        return res.redirect('/login')
     }
     next();
 }
@@ -19,13 +18,11 @@ function protected_routes(req, res, next) {
 router.get('/', protected_routes, async(req, res) => {
     const user = req.session.user;
     const users = await get_users();
-
     res.render('index.html', { user, users })
 });
 
 router.get('/datos', protected_routes, async(req, res) => {
     const user = req.session.user;
-
     res.render('datos.html', { user });
 
 });
@@ -43,17 +40,14 @@ router.post('/datos', protected_routes, async(req, res) => {
     const user = await get_user(email);
     if (!user) {
         req.flash('errors', 'Usuario no existe o contraseña incorrecta');
-        console.log(req.body, 'Usuario no existe o contraseña incorrecta');
         return res.redirect('/login');
     }
 
     // 3. Validar que contraseña coincida con lo de la base de datos
     if (password != password_confirm) {
         req.flash('errors', 'Usuario no existe o contraseña incorrecta');
-        console.log('errors', 'contraseña');
         return res.redirect('/login');
     }
-    console.log('Todo ok con el update');
 
     // 2. Actualizar al usuario actual
     const password_encrypt = await bcrypt.hash(password, 10)
@@ -61,6 +55,12 @@ router.post('/datos', protected_routes, async(req, res) => {
     req.session.user = { email, nombre: name, anos_experiencia, especialidad }
     res.redirect('/');
 
+});
+
+router.get('/admin', async(req, res) => {
+    const user = req.session.user;
+    const users = await get_users();
+    res.render('admin.html', { user, users });
 });
 
 module.exports = router;

@@ -34,7 +34,6 @@ router.post('/login', async(req, res) => {
     res.redirect('/');
 });
 
-
 router.get('/register', (req, res) => {
     const errors = req.flash('errors');
     res.render('register.html', { errors });
@@ -87,5 +86,7 @@ router.get('/eliminar', async(req, res) => {
 
     res.redirect('/login');
 });
+
+
 
 module.exports = router;
