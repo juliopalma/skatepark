@@ -1,0 +1,29 @@
+{
+  "name": "la_skate_parks",
+  "version": "1.0.0",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "bcrypt": "^5.0.1",
+    "bootstrap": "^5.1.3",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.3",
+    "express-fileupload": "^1.3.1",
+    "express-session": "^1.17.2",
+    "fileupload": "^1.0.0",
+    "flash": "^1.1.0",
+    "jquery": "^3.6.0",
+    "nodemon": "^2.0.15",
+    "nunjucks": "^3.2.3",
+    "pg": "^8.7.3",
+    "session": "^0.1.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
