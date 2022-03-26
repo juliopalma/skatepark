@@ -76,7 +76,7 @@ router.post('/register', async(req, res) => {
     await create_user(email, name, password_encrypt, anio_exper, especialidad, foto.name, estado);
 
     // 4. Guardo el nuevo usuario en sesión
-    req.session.user = { name, email }
+    req.session.user = { name, email, anio_exper, especialidad }
     res.redirect('/login')
 });
 

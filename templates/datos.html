@@ -27,31 +27,31 @@
         <h2>Datos del perfil</h2>
         <hr class="w-50" />
 
-        <form>
+        <form action="/datos" method="post">
             <div class="form-group row w-50 m-auto">
                 <div class="form-group col-12 col-sm-6">
                     <label>Email</label>
-                    <input type="email" class="form-control m-auto" disabled value="tonyhawk@skate.com" name="email" />
+                    <input type="email" class="form-control m-auto" disabled value="{{user.email}}" name="email" />
                 </div>
                 <div class="form-group col-12 col-sm-6">
                     <label>Nombre</label>
-                    <input type="text" class="form-control m-auto" value="Tony Hawk" required name="name" />
+                    <input type="text" class="form-control m-auto" value="{{user.nombre}}" required name="name" />
                 </div>
                 <div class="form-group col-12 col-sm-6">
                     <label>Password</label>
-                    <input type="password" class="form-control m-auto" value="12345678" required name="password" />
+                    <input type="password" class="form-control m-auto" required name="password" />
                 </div>
                 <div class="form-group col-12 col-sm-6">
                     <label>Repita la password</label>
-                    <input type="password" class="form-control m-auto" value="12345678" required name="password_confirm" />
+                    <input type="password" class="form-control m-auto" required name="password_confirm" />
                 </div>
                 <div class="form-group col-12 col-sm-6">
                     <label>Años de experiencia</label>
-                    <input type="text" class="form-control m-auto" value="12" required name="anos_experiencia" />
+                    <input type="text" class="form-control m-auto" value="{{user.anos_experiencia}}" required name="anos_experiencia" />
                 </div>
                 <div class="form-group col-12 col-sm-6">
                     <label>Especialidad</label>
-                    <input type="text" class="form-control m-auto" value="Kickflip" required name="especialidad" />
+                    <input type="text" class="form-control m-auto" value="{{user.especialidad}}" required name="especialidad" />
                 </div>
             </div>
             <div class="mb-1">

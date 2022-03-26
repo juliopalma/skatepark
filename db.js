@@ -47,6 +47,19 @@ async function get_users() {
 
     return rows
 }
+
+/**********************************************************************************************/
+
+async function update(email, name, password, anio_exper, especialidad) {
+    const client = await pool.connect();
+    await client.query({
+        text: 'update skaters set nombre=$2, password=$3, anos_experiencia=$4, especialidad=$5  where email=$1',
+        values: [email, name, password, anio_exper, especialidad]
+    });
+
+    client.release();
+}
+
 /**********************************************************************************************/
 async function set_auth(user_id, new_auth) {
     const client = await pool.connect();
@@ -64,5 +77,6 @@ module.exports = {
     get_user,
     create_user,
     get_users,
+    update
     // set_auth
 }
