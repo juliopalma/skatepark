@@ -59,6 +59,19 @@ async function update(email, name, password, anio_exper, especialidad) {
 
     client.release();
 }
+/**********************************************************************************************/
+async function eliminar(email) {
+    const client = await pool.connect();
+    await client.query({
+        text: 'delete from skaters where email = $1',
+        values: [email]
+    });
+
+    client.release();
+
+}
+
+
 
 /**********************************************************************************************/
 async function set_auth(user_id, new_auth) {
@@ -77,6 +90,7 @@ module.exports = {
     get_user,
     create_user,
     get_users,
-    update
+    update,
+    eliminar
     // set_auth
 }

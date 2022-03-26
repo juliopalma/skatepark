@@ -23,7 +23,6 @@ router.get('/', protected_routes, async(req, res) => {
     res.render('index.html', { user, users })
 });
 
-//AGREGAR LA PAGINA PARA ACTUALIZAR LOS DATOS DE UN SKATER
 router.get('/datos', protected_routes, async(req, res) => {
     const user = req.session.user;
 
@@ -61,6 +60,7 @@ router.post('/datos', protected_routes, async(req, res) => {
     await update(email, name, password_encrypt, parseInt(anos_experiencia), especialidad);
     req.session.user = { email, nombre: name, anos_experiencia, especialidad }
     res.redirect('/');
+
 });
 
 module.exports = router;

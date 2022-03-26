@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { get_user, create_user } = require('../db.js');
+const { get_user, create_user, eliminar } = require('../db.js');
 const { route } = require('./routes.js');
 const router = express.Router();
 
@@ -78,6 +78,14 @@ router.post('/register', async(req, res) => {
     // 4. Guardo el nuevo usuario en sesión
     req.session.user = { name, email, anio_exper, especialidad }
     res.redirect('/login')
+});
+
+
+router.get('/eliminar', async(req, res) => {
+    const email = req.session.user.email;
+    await eliminar(email);
+
+    res.redirect('/login');
 });
 
 module.exports = router;
