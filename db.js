@@ -78,7 +78,7 @@ async function set_auth(user_id, new_auth) {
     const client = await pool.connect();
 
     await client.query({
-        text: 'update users set auth=$2 where id=$1',
+        text: 'update skaters set estado=$2 where id=$1',
         values: [parseInt(user_id), new_auth]
     });
 
@@ -91,6 +91,6 @@ module.exports = {
     create_user,
     get_users,
     update,
-    eliminar
-    // set_auth
+    eliminar,
+    set_auth
 }

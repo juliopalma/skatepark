@@ -74,7 +74,9 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>
-                        <div></div>
+                        <div>
+                            <img src="imgs/{{user.foto}}" alt="photo" width="50" height="50">
+                        </div>
                     </td>
                     <td>{{ user.nombre }}</td>
 
@@ -82,13 +84,34 @@
                     <td>{{ user.especialidad }}</td>
 
                     <!--  <td>{{ user.estado }}</td> -->
-                    <td><input data-id="{{ user.id }}" type="checkbox" class="check-auth" {% if user.auth %}checked{% endif %}></td>
+                    <td><input data-id="{{ user.id }}" type="checkbox" class="check-auth" {% if user.estado %}checked{% endif %}></td>
 
                 </tr>
                 {% endfor %}
 
             </tbody>
         </table>
+        <a href="/">Lista de Participantes</a> {% block scripts %}
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            $('.check-auth').on('click', async function() {
+                // 1. Recuperamos si el checkbox está checked o no
+                const esta_validado = $(this).is(':checked')
+                    // recuperamos el id del usuario (desde un atributo "data-")
+                const user_id = $(this).attr('data-id')
+
+                // mandamos un PUT mediante AJAX
+                await axios.put(`/users/${user_id}`, {
+                    new_condition: esta_validado
+                })
+
+                console.log(`El usuario ${user_id} cambia a ${esta_validado}`);
+            })
+        </script>
+        {% endblock %}
+
     </div>
 </body>
 

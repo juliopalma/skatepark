@@ -63,4 +63,13 @@ router.get('/admin', async(req, res) => {
     res.render('admin.html', { user, users });
 });
 
+router.put('/users/:id', async(req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+
+    await set_auth(req.params.id, req.body.new_condition)
+
+    res.json({ todo: 'ok' })
+})
+
 module.exports = router;

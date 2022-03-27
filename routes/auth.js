@@ -48,8 +48,7 @@ router.post('/register', async(req, res) => {
     const anio_exper = req.body.anio_exper;
     const especialidad = req.body.especialidad;
     const foto = req.files.foto;
-    // const estado = req.body.estado;
-    const estado = true;
+    const estado = req.body.estado;
 
     const ext = foto.name.split('.').slice(-1)[0].toLowerCase();
     //validar que la extencion es permitida, jpg, png, jpeg, bmp
