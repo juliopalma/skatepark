@@ -47,15 +47,16 @@ router.post('/register', async(req, res) => {
     const password_confirm = req.body.password_confirm;
     const anio_exper = req.body.anio_exper;
     const especialidad = req.body.especialidad;
-    const foto = req.files.foto;
+    const foto = req.files.foto.name;
+    const fileimagen = req.files.foto
     const estado = req.body.estado;
 
-    const ext = foto.name.split('.').slice(-1)[0].toLowerCase();
+    //const ext = foto.name.split('.').slice(-1)[0].toLowerCase();
     //validar que la extencion es permitida, jpg, png, jpeg, bmp
-    if (ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'bmp') {
-        req.flash('errors', 'La extension del archivo no es la correcta');
-        return res.redirect('/register');
-    }
+    // if (ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'bmp') {
+    //     req.flash('errors', 'La extension del archivo no es la correcta');
+    //     return res.redirect('/register');
+    // }
 
     // 2. validar que contraseñas sean iguales
     if (password != password_confirm) {
@@ -71,7 +72,10 @@ router.post('/register', async(req, res) => {
     }
 
     const password_encrypt = await bcrypt.hash(password, 10);
-    await create_user(email, name, password_encrypt, anio_exper, especialidad, foto.name, estado);
+    await create_user(email, name, password_encrypt, anio_exper, especialidad, foto, estado);
+
+    await fileimagen.mv(`static/imgs/${foto}`);
+
 
     // 4. Guardo el nuevo usuario en sesión
     req.session.user = { name, email, anio_exper, especialidad }
@@ -86,6 +90,37 @@ router.get('/eliminar', async(req, res) => {
     res.redirect('/login');
 });
 
+
+
+
+
+
+
+/* router.post('/imagen', async(req, res) => {
+
+    const img = req.files.target_file;
+    const posicion = req.body.posicion;
+
+    if (parseInt(posicion) <= 8) {
+        await img.mv(`static/imgs/imagen-${posicion}.jpg`);
+    } else {
+        console.log("Debe ingresar una posicion entre 1 y 8");
+    }
+    //res.send('imagen subida de forma exitosa al collage');
+    res.redirect('/collage');
+
+}); */
+
+/* router.post('/guardarimg', async(req, res) => {
+
+    const img = req.files.target_file;
+
+    await img.mv(`static/imgs/`);
+
+    res.redirect('/');
+
+});
+ */
 
 
 module.exports = router;
