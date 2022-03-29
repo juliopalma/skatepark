@@ -25,7 +25,6 @@
 
     <div class="py-4">
         <h2>Administración</h2>
-        <hr class="w-50" />
 
         <table class="table w-50 m-auto">
             <thead>
@@ -39,37 +38,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <div></div>
-                    </td>
-                    <td>Tony Hawk</td>
-                    <td>12</td>
-                    <td>Kickflip</td>
-                    <td><input type="checkbox" checked /></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>
-                        <div></div>
-                    </td>
-                    <td>Evelien Bouilliart</td>
-                    <td>10</td>
-                    <td>Heelflip</td>
-                    <td><input type="checkbox" checked /></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>
-                        <div></div>
-                    </td>
-                    <td>Danny Way</td>
-                    <td>8</td>
-                    <td>Ollie</td>
-                    <td><input type="checkbox" /></td>
-                </tr>
-
                 {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
@@ -83,7 +51,6 @@
                     <td>{{ user.anos_experiencia }}</td>
                     <td>{{ user.especialidad }}</td>
 
-                    <!--  <td>{{ user.estado }}</td> -->
                     <td><input data-id="{{ user.id }}" type="checkbox" class="check-auth" {% if user.estado %}checked{% endif %}></td>
 
                 </tr>
@@ -97,12 +64,9 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
             $('.check-auth').on('click', async function() {
-                // 1. Recuperamos si el checkbox está checked o no
-                const esta_validado = $(this).is(':checked')
-                    // recuperamos el id del usuario (desde un atributo "data-")
-                const user_id = $(this).attr('data-id')
 
-                // mandamos un PUT mediante AJAX
+                const esta_validado = $(this).is(':checked')
+                const user_id = $(this).attr('data-id')
                 await axios.put(`/users/${user_id}`, {
                     new_condition: esta_validado
                 })
