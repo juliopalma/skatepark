@@ -51,12 +51,12 @@ router.post('/register', async(req, res) => {
     const fileimagen = req.files.foto
     const estado = req.body.estado;
 
-    //const ext = foto.name.split('.').slice(-1)[0].toLowerCase();
+    const ext = foto.split('.').slice(-1)[0].toLowerCase();
     //validar que la extencion es permitida, jpg, png, jpeg, bmp
-    // if (ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'bmp') {
-    //     req.flash('errors', 'La extension del archivo no es la correcta');
-    //     return res.redirect('/register');
-    // }
+    if (ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'bmp') {
+        req.flash('errors', 'La extension del archivo no es la correcta');
+        return res.redirect('/register');
+    }
 
     // 2. validar que contraseñas sean iguales
     if (password != password_confirm) {
